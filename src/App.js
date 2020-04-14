@@ -7,13 +7,20 @@ class App extends Component {
     email: "",
     pass: "",
     accept: false,
+
+    errors: {
+      username: false,
+      email: false,
+      pass: false,
+      accept: false,
+    },
   };
 
   validateMessages = {
     username_incorrect:
-      "Your name have to be longer than 10 letters and cannot contain space",
-    email_incorrect: 'Your email lacks "@" ',
-    password_incorrect: "Password must have 8 letters",
+      "Your name have to be longer than 10 letters and cannot contain space!",
+    email_incorrect: 'Your email lacks "@" !',
+    password_incorrect: "Password must have 8 letters!",
     accept_incorrect: "Rules not accepted",
   };
 
@@ -51,6 +58,9 @@ class App extends Component {
               value={this.state.username}
               onChange={this.handleChange}
             />
+            {this.state.errors.username && (
+              <span> {this.validateMessages.username_incorrect} </span>
+            )}
           </label>
           <label htmlFor="email">
             Your email:
@@ -61,7 +71,11 @@ class App extends Component {
               value={this.state.email}
               onChange={this.handleChange}
             />
+            {this.state.errors.email && (
+              <span> {this.validateMessages.email_incorrect} </span>
+            )}
           </label>
+
           <label htmlFor="password">
             Your passs:
             <input
@@ -71,6 +85,9 @@ class App extends Component {
               value={this.state.pass}
               onChange={this.handleChange}
             />
+            {this.state.errors.pass && (
+              <span> {this.validateMessages.password_incorrect} </span>
+            )}
           </label>
 
           <label htmlFor="accept">
@@ -83,7 +100,9 @@ class App extends Component {
             />
             Accept rules
           </label>
-
+          {this.state.errors.accept && (
+            <span> {this.validateMessages.accept_incorrect} </span>
+          )}
           <button>Confirm</button>
         </form>
       </div>
