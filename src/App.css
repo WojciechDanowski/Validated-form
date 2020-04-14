@@ -10,3 +10,15 @@ input {
   margin-top: 20px;
   margin-left: 20px;
 }
+
+button {
+  display: block;
+  max-width: 200px;
+  margin-top: 20px;
+  padding: 10px 20px;
+}
+
+input[type="checkbox"] {
+  margin-left: 0;
+  margin-right: 20px;
+}

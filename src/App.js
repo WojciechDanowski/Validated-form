@@ -5,21 +5,43 @@ class App extends Component {
   state = {
     username: "",
     email: "",
-    password: "",
+    pass: "",
+    accept: false,
+  };
+
+  validateMessages = {
+    username_incorrect:
+      "Your name have to be longer than 10 letters and cannot contain space",
+    email_incorrect: 'Your email lacks "@" ',
+    password_incorrect: "Password must have 8 letters",
+    accept_incorrect: "Rules not accepted",
   };
 
   handleChange = (e) => {
-    const value = e.target.value;
+    const name = e.target.name;
+    const type = e.target.type;
+    if (type === "text" || type === "password" || type === "email") {
+      const value = e.target.value;
 
-    this.setState({
-      username: value,
-    });
+      this.setState({
+        [name]: value,
+      });
+    } else if (type === "checkbox") {
+      const checked = e.target.checked;
+      this.setState({
+        [name]: checked,
+      });
+    }
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   render() {
     return (
       <div className="App">
-        <form>
+        <form onSubmit={this.handleSubmit} noValidate>
           <label htmlFor="user">
             Your name:
             <input
@@ -45,11 +67,24 @@ class App extends Component {
             <input
               type="password"
               id="password"
-              name="password"
-              value={this.state.password}
+              name="pass"
+              value={this.state.pass}
               onChange={this.handleChange}
             />
           </label>
+
+          <label htmlFor="accept">
+            <input
+              type="checkbox"
+              id="accept"
+              name="accept"
+              checked={this.state.accept}
+              onChange={this.handleChange}
+            />
+            Accept rules
+          </label>
+
+          <button>Confirm</button>
         </form>
       </div>
     );
